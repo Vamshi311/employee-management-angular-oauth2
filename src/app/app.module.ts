@@ -14,7 +14,7 @@ import { AuthService } from './service/auth.service';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthGuardService } from './service/auth-guard.service';
-import { BasicAuthHttpInterceptorService } from './service/basic-auth-http-interceptor.service';
+import { OAuth2HttpInterceptorService } from './service/oauth2-http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { BasicAuthHttpInterceptorService } from './service/basic-auth-http-inter
   ],
   providers: [EmployeeService, AuthService, AuthGuardService, 
     {  
-      provide:HTTP_INTERCEPTORS, useClass:BasicAuthHttpInterceptorService, multi:true 
+      provide:HTTP_INTERCEPTORS, useClass:OAuth2HttpInterceptorService, multi:true 
     }
   ],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class BasicAuthHttpInterceptorService implements HttpInterceptor {
+export class OAuth2HttpInterceptorService implements HttpInterceptor {
 
   constructor() { }
 
