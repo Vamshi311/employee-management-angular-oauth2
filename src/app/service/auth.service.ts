@@ -11,12 +11,11 @@ export class AuthService {
 
   authenticate(username, password) {
 
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.http.get<User>('/server/employees/validateLogin',{headers}).pipe(
+    return this.http.post<JwtResponse>('/server/authenticate',{username, password}).pipe(
      map(
        userData => {
         sessionStorage.setItem('username',username);
-        sessionStorage.setItem('basicAuth', 'Basic ' + btoa(username + ':' + password));
+        sessionStorage.setItem('OAuthToken', 'Bearer ' + userData.token);
         return userData;
        }
      )
@@ -31,11 +30,15 @@ export class AuthService {
 
   logout() {
     sessionStorage.removeItem('username');
-    sessionStorage.removeItem('basicAuth');
+    sessionStorage.removeItem('OAuthToken');
   }
 
 }
 
 export class User {
   status: String
+}
+
+export class JwtResponse {
+  token: String
 }
